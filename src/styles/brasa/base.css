@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap');
+
+:root{color-scheme:dark;--brasa-black:#0d0c0b;--brasa-black-soft:#141210;--brasa-orange:#f45a24;--brasa-orange-bright:#ff6a21;--brasa-cream:#f1e9dc;--brasa-muted:rgba(241,233,220,.62);--brasa-border:rgba(241,233,220,.14);--brasa-max:1440px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--brasa-black)}
+body{margin:0;min-width:320px;background:var(--brasa-black);color:var(--brasa-cream);font-family:Inter,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.brasa-header{position:fixed;top:0;left:0;z-index:50;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;width:100%;padding:24px clamp(20px,4vw,64px)}
+.brasa-logo,.brasa-nav a,.brasa-header-cta,.brasa-kicker,.brasa-section__eyebrow,.brasa-scroll,.brasa-kitchen__content span,.brasa-restaurant__details span,.brasa-footer__info span,.brasa-footer__bottom{font-family:'DM Mono',monospace;letter-spacing:.12em}
+.brasa-logo{font-size:.82rem;font-weight:500;text-decoration:none}
+.brasa-nav{display:flex;gap:32px;justify-content:center}
+.brasa-nav a,.brasa-header-cta{font-size:.58rem;text-decoration:none}
+.brasa-nav a{color:var(--brasa-muted);transition:color .22s}
+.brasa-nav a:hover{color:var(--brasa-cream)}
+.brasa-header-cta{justify-self:end;padding:11px 15px;border:1px solid rgba(244,90,36,.7);border-radius:999px;color:var(--brasa-orange-bright)}
+.brasa-hero{position:relative;min-height:100svh;display:grid;place-items:center;overflow:hidden;background:#050403}
+.brasa-media{position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(244,90,36,.16),transparent 48%),#1b1714}
+.brasa-media__video{width:100%;height:100%;display:block;object-fit:cover}
+.brasa-media--hero{position:absolute;inset:0;background:#0d0c0b}
+.brasa-hero__veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,12,11,.35),transparent 35%,rgba(13,12,11,.56)),linear-gradient(90deg,rgba(13,12,11,.3),transparent 60%)}
+.brasa-hero__content{position:relative;z-index:2;width:min(calc(100% - 40px),1100px);text-align:center}
+.brasa-kicker{margin:0 0 22px;color:rgba(241,233,220,.72);font-size:.58rem}
+.brasa-hero h1{margin:0;color:var(--brasa-cream);font:500 clamp(6rem,18vw,16rem)/.78 'Playfair Display',serif;letter-spacing:-.08em}
+.brasa-hero__line{margin:28px 0 0;color:var(--brasa-orange-bright);font:italic clamp(1.1rem,2vw,1.65rem) 'Playfair Display',serif}
+.brasa-scroll{position:absolute;right:32px;bottom:28px;z-index:3;display:flex;gap:12px;align-items:center;color:rgba(241,233,220,.62);font-size:.52rem;text-decoration:none}
+.brasa-section{width:min(100%,var(--brasa-max));margin:0 auto;padding:clamp(90px,12vw,180px) clamp(20px,5vw,72px)}
+.brasa-section__eyebrow{color:var(--brasa-orange);font-size:.55rem}
+.brasa-intro__copy{width:min(100%,900px);margin:44px 0 80px}
+.brasa-intro h2,.brasa-section__heading h2,.brasa-experience__intro h2,.brasa-restaurant h2,.brasa-story h2,.brasa-reservation h2{margin:0;font:500 clamp(3rem,7vw,7rem)/.96 'Playfair Display',serif;letter-spacing:-.045em}
+.brasa-intro p{max-width:580px;margin:38px 0 0;color:var(--brasa-muted);font-size:clamp(1rem,1.4vw,1.2rem);line-height:1.65}
+.brasa-media--wide{min-height:min(64vw,760px)}
+.brasa-section__heading{display:grid;grid-template-columns:.7fr 2fr;gap:32px;align-items:end;margin-bottom:80px}
+.brasa-dishes{display:grid;gap:120px}
+.brasa-dish{display:grid;grid-template-columns:.55fr 1.9fr .9fr;gap:28px;align-items:end}
+.brasa-dish:nth-child(even){grid-template-columns:.9fr 1.9fr .55fr}
+.brasa-dish:nth-child(even) .brasa-dish__meta{order:3}.brasa-dish:nth-child(even) .brasa-dish__copy{order:1}
+.brasa-dish__meta{display:flex;justify-content:space-between;align-self:start;color:var(--brasa-orange);font:.58rem 'DM Mono',monospace;letter-spacing:.1em}
+.brasa-media--dish{min-height:min(56vw,700px)}
+.brasa-dish__copy h3{margin:0;font:500 clamp(2.2rem,4vw,4.5rem)/.95 'Playfair Display',serif;letter-spacing:-.045em}
+.brasa-dish__copy p{max-width:360px;margin:18px 0 0;color:var(--brasa-muted);line-height:1.55}
+.brasa-kitchen{position:relative;min-height:100svh;overflow:hidden;background:#070605}
+.brasa-kitchen__media{position:absolute;inset:0}
+.brasa-kitchen__content{position:relative;z-index:2;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:100px clamp(20px,8vw,120px);background:linear-gradient(90deg,rgba(13,12,11,.7),transparent 70%)}
+.brasa-kitchen__content span{margin-bottom:34px;color:var(--brasa-orange);font-size:.55rem}
+.brasa-kitchen__content strong{width:fit-content;color:var(--brasa-cream);font:500 clamp(3.5rem,10vw,10rem)/.84 'Playfair Display',serif;letter-spacing:-.06em}
+.brasa-kitchen__content strong:last-child{color:var(--brasa-orange-bright)}
+.brasa-menu__layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(40px,7vw,110px)}
+.brasa-menu__image{min-height:800px;position:sticky;top:30px;align-self:start}
+.brasa-menu__groups{display:grid;gap:80px}
+.brasa-menu__group h3{margin:0 0 28px;color:var(--brasa-orange);font:.65rem 'DM Mono',monospace;letter-spacing:.16em;text-transform:uppercase}
+.brasa-menu-item{display:flex;justify-content:space-between;gap:30px;padding:24px 0;border-top:1px solid var(--brasa-border)}
+.brasa-menu-item h4{margin:0;font:500 clamp(1.3rem,2vw,1.8rem) 'Playfair Display',serif}
+.brasa-menu-item p{max-width:430px;margin:8px 0 0;color:var(--brasa-muted);line-height:1.45}
+.brasa-menu-item>span{flex:0 0 auto;color:var(--brasa-orange-bright);font:.65rem 'DM Mono',monospace}
+.brasa-experience__intro{display:grid;grid-template-columns:1.5fr .8fr;gap:60px;align-items:end;margin:48px 0 90px}
+.brasa-experience__intro p{margin:0;color:var(--brasa-muted);line-height:1.6}
+.brasa-experience__gallery{display:grid;grid-template-columns:1.1fr .8fr 1fr;gap:14px;align-items:start}
+.brasa-experience__item:nth-child(2){margin-top:110px}.brasa-experience__item:nth-child(3){margin-top:36px}
+.brasa-media--experience{min-height:600px}.brasa-experience__item:nth-child(2) .brasa-media--experience{min-height:460px}
+.brasa-experience figcaption{margin-top:12px;color:var(--brasa-orange);font:.55rem 'DM Mono',monospace;letter-spacing:.12em}
+.brasa-restaurant__layout{display:grid;grid-template-columns:1.4fr .8fr;gap:80px;margin:48px 0 70px}
+.brasa-restaurant__layout p{max-width:520px;color:var(--brasa-muted);line-height:1.6}
+.brasa-restaurant__details{display:grid;gap:34px}.brasa-restaurant__details div{display:grid;gap:6px}.brasa-restaurant__details span{margin-bottom:8px;color:var(--brasa-orange);font-size:.55rem}.brasa-restaurant__details strong{font-size:.9rem;font-weight:400}
+.brasa-media--location{min-height:520px}
+.brasa-story{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(40px,7vw,110px);align-items:center}
+.brasa-media--story{min-height:760px}
+.brasa-story__copy h2{margin-top:44px;font-size:clamp(4rem,8vw,8rem)}
+.brasa-story__copy p{max-width:480px;color:var(--brasa-muted);line-height:1.7}.brasa-story__copy p:first-of-type{margin-top:42px}.brasa-story__copy p+p{margin-top:18px}
+.brasa-reservation{position:relative;min-height:80svh;display:grid;place-items:center;overflow:hidden;background:var(--brasa-orange)}
+.brasa-media--reservation{position:absolute;inset:0;background:#3a170d}.brasa-reservation:after{content:'';position:absolute;inset:0;background:rgba(13,12,11,.55)}
+.brasa-reservation__content{position:relative;z-index:2;width:min(calc(100% - 40px),1100px);text-align:center}
+.brasa-reservation .brasa-section__eyebrow{color:var(--brasa-cream)}
+.brasa-reservation h2{margin:28px 0 42px;color:var(--brasa-cream);font-size:clamp(4.5rem,12vw,12rem)}
+.brasa-button{display:inline-flex;align-items:center;gap:24px;padding:18px 24px;border:1px solid var(--brasa-cream);color:var(--brasa-cream);font:.62rem 'DM Mono',monospace;letter-spacing:.1em;text-decoration:none;transition:background .22s,color .22s}.brasa-button:hover{background:var(--brasa-cream);color:var(--brasa-black)}
+.brasa-footer{padding:70px clamp(20px,5vw,72px) 28px;background:var(--brasa-black)}
+.brasa-footer__brand{color:var(--brasa-cream);font:500 clamp(5rem,16vw,15rem)/.8 'Playfair Display',serif;letter-spacing:-.08em}
+.brasa-footer__info{display:flex;flex-wrap:wrap;gap:26px;margin-top:80px;padding-bottom:40px;border-bottom:1px solid var(--brasa-border)}
+.brasa-footer__info span{margin-right:auto;color:var(--brasa-orange);font-size:.55rem}.brasa-footer__info a,.brasa-footer__bottom{color:var(--brasa-muted);font-size:.55rem;text-decoration:none}
+.brasa-footer__bottom{display:flex;justify-content:space-between;gap:20px;padding-top:22px}
+@media(max-width:850px){.brasa-header{grid-template-columns:1fr auto}.brasa-nav{display:none}.brasa-section__heading,.brasa-menu__layout,.brasa-experience__intro,.brasa-restaurant__layout,.brasa-story{grid-template-columns:1fr}.brasa-dish,.brasa-dish:nth-child(even){grid-template-columns:1fr}.brasa-dish:nth-child(even) .brasa-dish__meta,.brasa-dish:nth-child(even) .brasa-dish__copy{order:initial}.brasa-menu__image{position:relative;top:auto;min-height:60vw}.brasa-experience__gallery{grid-template-columns:1fr}.brasa-experience__item:nth-child(2),.brasa-experience__item:nth-child(3){margin-top:0}.brasa-media--experience,.brasa-experience__item:nth-child(2) .brasa-media--experience{min-height:72vw}}
+@media(max-width:560px){.brasa-header{padding:16px}.brasa-header-cta{padding:9px 12px;font-size:.5rem}.brasa-hero h1{font-size:clamp(5rem,28vw,8rem)}.brasa-scroll{right:18px;bottom:18px}.brasa-section{padding:90px 18px}.brasa-intro__copy{margin-bottom:48px}.brasa-dishes{gap:80px}.brasa-media--dish,.brasa-media--wide,.brasa-media--story,.brasa-media--location{min-height:100vw}.brasa-menu__image{min-height:110vw}.brasa-kitchen__content{padding:80px 18px}.brasa-kitchen__content strong{font-size:clamp(3.3rem,18vw,6rem)}.brasa-footer__info{display:grid}.brasa-footer__bottom{flex-direction:column}}
