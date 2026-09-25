@@ -1,0 +1,236 @@
+.brasa-kitchen {
+  position: relative;
+  height: 300vh;
+  background: #11100f;
+}
+
+.brasa-kitchen__sticky {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100vh;
+
+  min-height: 620px;
+
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.brasa-kitchen__sticky.is-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100vh;
+
+  z-index: 20;
+}
+
+.brasa-kitchen__sticky.is-finished {
+  position: absolute;
+
+  top: auto;
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100vh;
+}
+
+.brasa-kitchen__media {
+  position: absolute;
+  inset: 0;
+
+  z-index: -3;
+
+  overflow: hidden;
+
+  background: #171411;
+}
+
+.brasa-kitchen__video {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+  object-position: center;
+}
+
+.brasa-kitchen__veil {
+  position: absolute;
+  inset: 0;
+
+  z-index: -2;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.28) 0%,
+      rgba(0, 0, 0, 0.08) 45%,
+      rgba(0, 0, 0, 0.4) 100%
+    );
+}
+
+.brasa-kitchen__words {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding:
+    clamp(30px, 6vw, 90px)
+    clamp(20px, 5vw, 80px);
+
+  pointer-events: none;
+
+  overflow: hidden;
+}
+
+.brasa-kitchen__word {
+  display: block;
+
+  width: 100%;
+
+  color: #f4f0e8;
+
+  font-family:
+    'Playfair Display',
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(4.5rem, 13vw, 13rem);
+
+  font-weight: 500;
+
+  line-height: 0.78;
+
+  letter-spacing: -0.065em;
+
+  text-align: center;
+
+  white-space: nowrap;
+
+  opacity: 0;
+
+  transform:
+    translate3d(0, 120%, 0);
+
+  will-change:
+    transform,
+    opacity;
+
+  text-shadow:
+    0 4px 30px
+    rgba(0, 0, 0, 0.18);
+}
+
+.brasa-kitchen__word--1 {
+  margin-bottom: -0.01em;
+}
+
+.brasa-kitchen__word--2 {
+  margin-bottom: -0.01em;
+}
+
+.brasa-kitchen__word--3 {
+  margin-bottom: -0.01em;
+}
+
+.brasa-kitchen__word--4 {
+  color:
+    var(
+      --brasa-orange,
+      #f25c19
+    );
+}
+
+
+/* ----------------------------------------
+   TABLET
+---------------------------------------- */
+
+@media (max-width: 900px) {
+  .brasa-kitchen {
+    height: 270vh;
+  }
+
+  .brasa-kitchen__sticky {
+    min-height: 560px;
+  }
+
+  .brasa-kitchen__words {
+    padding-inline: 20px;
+  }
+
+  .brasa-kitchen__word {
+    font-size:
+      clamp(4rem, 14vw, 8rem);
+
+    line-height: 0.82;
+  }
+}
+
+
+/* ----------------------------------------
+   MOBILE
+---------------------------------------- */
+
+@media (max-width: 600px) {
+  .brasa-kitchen {
+    height: 250vh;
+  }
+
+  .brasa-kitchen__sticky {
+    min-height: 520px;
+  }
+
+  .brasa-kitchen__words {
+    justify-content: center;
+    padding-inline: 12px;
+  }
+
+  .brasa-kitchen__word {
+    font-size:
+      clamp(3.4rem, 17vw, 6rem);
+
+    line-height: 0.84;
+
+    letter-spacing: -0.06em;
+  }
+}
+
+
+/* ----------------------------------------
+   REDUCED MOTION
+---------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .brasa-kitchen {
+    height: 100vh;
+  }
+
+  .brasa-kitchen__sticky {
+    position: relative;
+    top: auto;
+    left: auto;
+
+    width: 100%;
+    height: 100vh;
+  }
+
+  .brasa-kitchen__word {
+    opacity: 1;
+    transform: none;
+  }
+}
