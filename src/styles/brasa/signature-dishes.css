@@ -14,12 +14,50 @@
   margin-bottom: 110px;
 }
 
+.brasa-signature
+  .brasa-section__heading
+  .brasa-word {
+  display: inline-block;
+
+  opacity: 0;
+
+  transform:
+    translateY(0.65em)
+    rotate(2deg);
+
+  clip-path: inset(0 0 100% 0);
+
+  transition:
+    opacity 0.7s
+      cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s
+      cubic-bezier(0.22, 1, 0.36, 1),
+    clip-path 0.9s
+      cubic-bezier(0.22, 1, 0.36, 1);
+
+  transition-delay:
+    calc(var(--word-index) * 45ms);
+}
+
+.brasa-signature
+  .brasa-section__heading.is-visible
+  .brasa-word {
+  opacity: 1;
+
+  transform:
+    translateY(0)
+    rotate(0);
+
+  clip-path: inset(0 0 0 0);
+}
+
 /* =========================================================
    LISTA
    ========================================================= */
 
 .brasa-dishes {
   display: grid;
+
   gap: clamp(100px, 13vw, 190px);
 }
 
@@ -31,27 +69,33 @@
   display: grid;
 
   grid-template-columns:
-    0.45fr
-    1.9fr
-    0.8fr;
+    auto
+    minmax(0, 2fr)
+    minmax(180px, 0.62fr);
 
-  gap: clamp(24px, 3vw, 44px);
+  gap: clamp(18px, 2vw, 30px);
 
   align-items: end;
+
+  opacity: 1;
 }
 
 .brasa-dish:nth-child(even) {
   grid-template-columns:
-    0.8fr
-    1.9fr
-    0.45fr;
+    minmax(180px, 0.62fr)
+    minmax(0, 2fr)
+    auto;
 }
 
-.brasa-dish:nth-child(even) .brasa-dish__meta {
+.brasa-dish:nth-child(even)
+  .brasa-dish__meta {
   order: 3;
+
+  justify-content: flex-end;
 }
 
-.brasa-dish:nth-child(even) .brasa-dish__copy {
+.brasa-dish:nth-child(even)
+  .brasa-dish__copy {
   order: 1;
 }
 
@@ -60,23 +104,53 @@
    ========================================================= */
 
 .brasa-dish__meta {
-  align-self: start;
+  align-self: end;
 
   display: flex;
+
+  align-items: flex-end;
+
   justify-content: flex-start;
+
+  padding-bottom: 10px;
 
   color: var(--brasa-orange);
 
   font:
-    400 0.58rem / 1
-    'DM Mono',
-    monospace;
+    500 clamp(2.4rem, 4vw, 4.5rem) / 0.9
+    'Playfair Display',
+    serif;
 
-  letter-spacing: 0.12em;
+  letter-spacing: -0.055em;
+
+  white-space: nowrap;
+
+  opacity: 0;
+
+  transform:
+    translateY(22px)
+    scale(0.94);
+
+  transition:
+    opacity 0.7s
+      cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s
+      cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.brasa-dish.is-visible
+  .brasa-dish__meta {
+  opacity: 1;
+
+  transform:
+    translateY(0)
+    scale(1);
+
+  transition-delay: 80ms;
 }
 
 /* =========================================================
-   VÍDEO
+   ÁREA DO VÍDEO
    ========================================================= */
 
 .brasa-dish__media {
@@ -112,7 +186,8 @@
   filter: saturate(0.92);
 
   transition:
-    transform 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1.2s
+      cubic-bezier(0.22, 1, 0.36, 1),
     filter 0.6s ease;
 }
 
@@ -176,6 +251,7 @@
   z-index: 3;
 
   display: flex;
+
   align-items: center;
 
   gap: 11px;
@@ -184,7 +260,8 @@
 
   color: var(--brasa-cream);
 
-  background: rgba(13, 12, 11, 0.5);
+  background:
+    rgba(13, 12, 11, 0.5);
 
   border:
     1px solid
@@ -242,6 +319,8 @@
 
 .brasa-dish__copy {
   align-self: end;
+
+  padding-bottom: 4px;
 }
 
 .brasa-dish__copy h3 {
@@ -255,6 +334,46 @@
   letter-spacing: -0.045em;
 }
 
+.brasa-dish__copy h3 .brasa-word {
+  display: inline-block;
+
+  opacity: 0;
+
+  transform:
+    translateY(0.55em)
+    rotate(1.5deg);
+
+  clip-path: inset(0 0 100% 0);
+
+  transition:
+    opacity 0.65s
+      cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s
+      cubic-bezier(0.22, 1, 0.36, 1),
+    clip-path 0.8s
+      cubic-bezier(0.22, 1, 0.36, 1);
+
+  transition-delay:
+    calc(140ms + (var(--word-index) * 65ms));
+}
+
+.brasa-dish.is-visible
+  .brasa-dish__copy
+  h3
+  .brasa-word {
+  opacity: 1;
+
+  transform:
+    translateY(0)
+    rotate(0);
+
+  clip-path: inset(0 0 0 0);
+}
+
+/* =========================================================
+   DESCRIÇÃO
+   ========================================================= */
+
 .brasa-dish__copy p {
   max-width: 360px;
 
@@ -265,12 +384,41 @@
   line-height: 1.55;
 }
 
+.brasa-dish__copy p .brasa-word {
+  display: inline-block;
+
+  opacity: 0;
+
+  transform: translateY(10px);
+
+  transition:
+    opacity 0.55s ease,
+    transform 0.65s
+      cubic-bezier(0.22, 1, 0.36, 1);
+
+  transition-delay:
+    calc(
+      430ms
+      + (var(--word-index) * 28ms)
+    );
+}
+
+.brasa-dish.is-visible
+  .brasa-dish__copy
+  p
+  .brasa-word {
+  opacity: 1;
+
+  transform: translateY(0);
+}
+
 /* =========================================================
    TABLET
    ========================================================= */
 
 @media (max-width: 850px) {
-  .brasa-signature .brasa-section__heading {
+  .brasa-signature
+    .brasa-section__heading {
     margin-bottom: 70px;
   }
 
@@ -290,6 +438,10 @@
 
   .brasa-dish__meta {
     order: 1;
+
+    padding-bottom: 0;
+
+    justify-content: flex-start;
   }
 
   .brasa-dish__media {
@@ -308,12 +460,17 @@
    ========================================================= */
 
 @media (max-width: 560px) {
-  .brasa-signature .brasa-section__heading {
+  .brasa-signature
+    .brasa-section__heading {
     margin-bottom: 58px;
   }
 
   .brasa-dishes {
     gap: 90px;
+  }
+
+  .brasa-dish__meta {
+    font-size: 2.3rem;
   }
 
   .brasa-dish__media {
@@ -344,8 +501,19 @@
    ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-  .brasa-dish__media {
+  .brasa-signature
+    .brasa-section__heading
+    .brasa-word,
+  .brasa-dish__copy
+    .brasa-word,
+  .brasa-dish__meta {
+    opacity: 1;
+
     transform: none;
+
+    clip-path: none;
+
+    transition: none;
   }
 
   .brasa-dish__video {

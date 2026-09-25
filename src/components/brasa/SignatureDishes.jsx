@@ -4,54 +4,43 @@ import { signatureDishes } from '../../data/brasa'
 
 import '../../styles/brasa/signature-dishes.css'
 
-function DishMedia({ dish }) {
+function splitWords(text) {
+  const words = text.split(' ')
+
+  return words.map((word, index) => (
+    <span key={`${word}-${index}`}>
+      <span
+        className="brasa-word"
+        style={{
+          '--word-index': index,
+        }}
+      >
+        {word}
+      </span>
+
+      {index < words.length - 1 && ' '}
+    </span>
+  ))
+}
+
+function DishMedia({ dish, isVisible }) {
   const mediaRef = useRef(null)
   const videoRef = useRef(null)
 
   const [isPlaying, setIsPlaying] = useState(false)
-  const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
     const media = mediaRef.current
-    const video = videoRef.current
 
-    if (!media || !video) return
-
-    video.load()
-
-    const showFirstFrame = () => {
-      try {
-        video.currentTime = 0
-      } catch {
-        // O navegador pode bloquear a alteração antes do vídeo estar pronto.
-      }
-    }
-
-    if (video.readyState >= 2) {
-      showFirstFrame()
-    } else {
-      video.addEventListener(
-        'loadeddata',
-        showFirstFrame,
-        { once: true }
-      )
-    }
+    if (!media) return
 
     if (!('IntersectionObserver' in window)) {
-      setIsVisible(true)
-
-      return () => {
-        video.removeEventListener(
-          'loadeddata',
-          showFirstFrame
-        )
-      }
+      return
     }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true)
           observer.disconnect()
         }
       },
@@ -64,11 +53,6 @@ function DishMedia({ dish }) {
 
     return () => {
       observer.disconnect()
-
-      video.removeEventListener(
-        'loadeddata',
-        showFirstFrame
-      )
     }
   }, [])
 
@@ -82,7 +66,12 @@ function DishMedia({ dish }) {
       .then(() => {
         setIsPlaying(true)
       })
-      .catch(() => {
+      .catch((error) => {
+        console.error(
+          `Não foi possível reproduzir o vídeo de ${dish.name}:`,
+          error
+        )
+
         setIsPlaying(false)
       })
   }
@@ -128,10 +117,6 @@ function DishMedia({ dish }) {
     pauseVideo()
   }
 
-  const handleVideoEnded = () => {
-    setIsPlaying(false)
-  }
-
   return (
     <div
       className={`brasa-dish__media ${
@@ -166,7 +151,7 @@ function DishMedia({ dish }) {
         muted
         playsInline
         preload="auto"
-        onEnded={handleVideoEnded}
+        onEnded={() => setIsPlaying(false)}
       >
         <source
           src={dish.video}
@@ -190,39 +175,137 @@ function DishMedia({ dish }) {
   )
 }
 
+function Dish({ dish, index }) {
+  const dishRef = useRef(null)
+
+  const [isVisible, setIsVisible] = useState(false)
+
+  useEffect(() => {
+    const element = dishRef.current
+
+    if (!element) return
+
+    if (!('IntersectionObserver' in window)) {
+      setIsVisible(true)
+      return
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+          observer.disconnect()
+        }
+      },
+      {
+        threshold: 0.18,
+        rootMargin: '0px 0px -8% 0px',
+      }
+    )
+
+    observer.observe(element)
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [])
+
+  return (
+    <article
+      className={`brasa-dish ${
+        isVisible ? 'is-visible' : ''
+      }`}
+      ref={dishRef}
+      style={{
+        '--dish-index': index,
+      }}
+    >
+      <div className="brasa-dish__meta">
+        <span>{dish.price}</span>
+      </div>
+
+      <DishMedia
+        dish={dish}
+        isVisible={isVisible}
+      />
+
+      <div className="brasa-dish__copy">
+        <h3 aria-label={dish.name}>
+          {splitWords(dish.name)}
+        </h3>
+
+        <p>
+          {splitWords(dish.description)}
+        </p>
+      </div>
+    </article>
+  )
+}
+
 export default function SignatureDishes() {
+  const headingRef = useRef(null)
+
+  const [headingVisible, setHeadingVisible] =
+    useState(false)
+
+  useEffect(() => {
+    const heading = headingRef.current
+
+    if (!heading) return
+
+    if (!('IntersectionObserver' in window)) {
+      setHeadingVisible(true)
+      return
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHeadingVisible(true)
+          observer.disconnect()
+        }
+      },
+      {
+        threshold: 0.3,
+      }
+    )
+
+    observer.observe(heading)
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [])
+
   return (
     <section
       className="brasa-section brasa-signature"
       id="pratos"
     >
-      <div className="brasa-section__heading">
+      <div
+        className={`brasa-section__heading ${
+          headingVisible ? 'is-visible' : ''
+        }`}
+        ref={headingRef}
+      >
         <div className="brasa-section__eyebrow">
           DA CASA
         </div>
 
         <h2>
-          Algumas coisas a gente faz questão de servir.
+          {splitWords(
+            'Algumas coisas a gente faz questão de servir.'
+          )}
         </h2>
       </div>
 
       <div className="brasa-dishes">
-        {signatureDishes.map((dish) => (
-          <article
-            className="brasa-dish"
+        {signatureDishes.map((dish, index) => (
+          <Dish
             key={dish.name}
-          >
-            <div className="brasa-dish__meta">
-              <span>{dish.price}</span>
-            </div>
-
-            <DishMedia dish={dish} />
-
-            <div className="brasa-dish__copy">
-              <h3>{dish.name}</h3>
-              <p>{dish.description}</p>
-            </div>
-          </article>
+            dish={dish}
+            index={index}
+          />
         ))}
       </div>
     </section>
