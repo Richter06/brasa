@@ -6,6 +6,7 @@
 
 .brasa-kitchen__sticky {
   position: absolute;
+
   top: 0;
   left: 0;
 
@@ -20,6 +21,7 @@
 
 .brasa-kitchen__sticky.is-fixed {
   position: fixed;
+
   top: 0;
   left: 0;
 
@@ -84,6 +86,7 @@
 
   display: flex;
   flex-direction: column;
+
   justify-content: center;
   align-items: center;
 
@@ -95,6 +98,66 @@
 
   overflow: hidden;
 }
+
+/* ----------------------------------------
+   QUEM SOMOS NÓS?
+---------------------------------------- */
+
+.brasa-kitchen__intro {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: max-content;
+  max-width: calc(100% - 40px);
+
+  display: block;
+
+  color:
+    var(
+      --brasa-orange,
+      #f25c19
+    );
+
+  font-family:
+    'Playfair Display',
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(3.2rem, 8vw, 8.5rem);
+
+  font-weight: 500;
+
+  line-height: 0.9;
+
+  letter-spacing:
+    -0.055em;
+
+  text-align: center;
+
+  white-space: nowrap;
+
+  opacity: 0;
+
+  transform:
+    translate3d(-50%, -50%, 0)
+    scale(1);
+
+  will-change:
+    transform,
+    opacity,
+    filter;
+
+  text-shadow:
+    0 5px 35px
+    rgba(0, 0, 0, 0.2);
+}
+
+/* ----------------------------------------
+   PALAVRAS
+---------------------------------------- */
 
 .brasa-kitchen__word {
   display: block;
@@ -155,7 +218,6 @@
     );
 }
 
-
 /* ----------------------------------------
    TABLET
 ---------------------------------------- */
@@ -173,6 +235,11 @@
     padding-inline: 20px;
   }
 
+  .brasa-kitchen__intro {
+    font-size:
+      clamp(2.6rem, 8vw, 6rem);
+  }
+
   .brasa-kitchen__word {
     font-size:
       clamp(4rem, 14vw, 8rem);
@@ -180,7 +247,6 @@
     line-height: 0.82;
   }
 }
-
 
 /* ----------------------------------------
    MOBILE
@@ -200,6 +266,15 @@
     padding-inline: 12px;
   }
 
+  .brasa-kitchen__intro {
+    max-width: calc(100% - 24px);
+
+    font-size:
+      clamp(2.1rem, 10vw, 4rem);
+
+    letter-spacing: -0.05em;
+  }
+
   .brasa-kitchen__word {
     font-size:
       clamp(3.4rem, 17vw, 6rem);
@@ -209,7 +284,6 @@
     letter-spacing: -0.06em;
   }
 }
-
 
 /* ----------------------------------------
    REDUCED MOTION
@@ -222,11 +296,22 @@
 
   .brasa-kitchen__sticky {
     position: relative;
+
     top: auto;
     left: auto;
 
     width: 100%;
     height: 100vh;
+  }
+
+  .brasa-kitchen__intro {
+    opacity: 0;
+
+    transform:
+      translate3d(-50%, -50%, 0)
+      scale(0.92);
+
+    filter: blur(10px);
   }
 
   .brasa-kitchen__word {

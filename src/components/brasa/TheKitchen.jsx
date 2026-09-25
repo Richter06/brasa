@@ -12,19 +12,27 @@ const words = [
 export default function TheKitchen() {
   const sectionRef = useRef(null)
   const stageRef = useRef(null)
+  const introRef = useRef(null)
   const wordRefs = useRef([])
 
   useEffect(() => {
     const section = sectionRef.current
     const stage = stageRef.current
+    const intro = introRef.current
 
-    if (!section || !stage) return
+    if (!section || !stage || !intro) return
 
     const reducedMotion = window.matchMedia(
       '(prefers-reduced-motion: reduce)'
     )
 
     const setFinalState = () => {
+      intro.style.transform =
+        'translate3d(-50%, calc(-50% - 120%), 0) scale(1.08)'
+
+      intro.style.opacity = '0'
+      intro.style.filter = 'blur(10px)'
+
       wordRefs.current.forEach((word) => {
         if (!word) return
 
@@ -68,13 +76,8 @@ export default function TheKitchen() {
 
     const updateStage = () => {
       const rect = section.getBoundingClientRect()
-      const sectionHeight = section.offsetHeight
       const viewportHeight = window.innerHeight
 
-      /*
-       * Antes da seção:
-       * o palco permanece no fluxo normal.
-       */
       if (rect.top > 0) {
         stage.classList.remove('is-fixed')
         stage.classList.remove('is-finished')
@@ -86,10 +89,6 @@ export default function TheKitchen() {
         return
       }
 
-      /*
-       * Enquanto ainda estamos dentro da área
-       * de animação, o palco fica preso na viewport.
-       */
       if (
         rect.top <= 0 &&
         rect.bottom > viewportHeight
@@ -101,17 +100,16 @@ export default function TheKitchen() {
         stage.classList.add('is-fixed')
 
         stage.style.top = '0px'
-        stage.style.left = `${stageRect.left}px`
-        stage.style.width = `${section.clientWidth}px`
+
+        stage.style.left =
+          `${stageRect.left}px`
+
+        stage.style.width =
+          `${section.clientWidth}px`
 
         return
       }
 
-      /*
-       * Quando chegamos ao final dos 300vh,
-       * o palco deixa de ficar fixo e permanece
-       * exatamente no final da seção.
-       */
       if (rect.bottom <= viewportHeight) {
         stage.classList.remove('is-fixed')
         stage.classList.add('is-finished')
@@ -124,32 +122,106 @@ export default function TheKitchen() {
 
     const animate = () => {
       currentProgress +=
-        (targetProgress - currentProgress) * 0.1
+        (targetProgress - currentProgress) *
+        0.1
+
+      /*
+       * ----------------------------------------
+       * QUEM SOMOS NÓS?
+       *
+       * Começa exatamente no centro.
+       * Depois sobe, aumenta levemente,
+       * perde opacidade e ganha blur.
+       * ----------------------------------------
+       */
+
+      const introStart = 0
+      const introEnd = 0.32
+
+      const introProgress =
+        Math.min(
+          1,
+          Math.max(
+            0,
+            (currentProgress - introStart) /
+              (introEnd - introStart)
+          )
+        )
+
+      const introEased =
+        1 -
+        Math.pow(
+          1 - introProgress,
+          3
+        )
+
+      const introTranslate =
+        introEased * -120
+
+      const introScale =
+        1 +
+        introEased * 0.08
+
+      const introOpacity =
+        Math.max(
+          0,
+          1 -
+            introProgress * 1.5
+        )
+
+      const introBlur =
+        introEased * 12
+
+      /*
+       * IMPORTANTE:
+       *
+       * O -50% horizontal permanece aqui.
+       * Sem ele, o left: 50% do CSS não
+       * consegue centralizar o elemento.
+       */
+
+      intro.style.transform =
+        `translate3d(
+          -50%,
+          calc(-50% + ${introTranslate}%),
+          0
+        ) scale(${introScale})`
+
+      intro.style.opacity =
+        introOpacity
+
+      intro.style.filter =
+        `blur(${introBlur}px)`
+
+      /*
+       * ----------------------------------------
+       * PALAVRAS
+       *
+       * Começam a aparecer depois que
+       * "QUEM SOMOS NÓS?" começa a sair.
+       * ----------------------------------------
+       */
 
       wordRefs.current.forEach(
         (word, index) => {
           if (!word) return
 
-          /*
-           * Cada palavra possui sua própria
-           * faixa dentro da timeline.
-           */
-          const start = index * 0.18
-          const end = start + 0.42
+          const start =
+            0.22 + index * 0.18
 
-          const wordProgress = Math.min(
-            1,
-            Math.max(
-              0,
-              (currentProgress - start) /
-                (end - start)
+          const end =
+            start + 0.42
+
+          const wordProgress =
+            Math.min(
+              1,
+              Math.max(
+                0,
+                (currentProgress - start) /
+                  (end - start)
+              )
             )
-          )
 
-          /*
-           * Ease-out para a palavra chegar
-           * suavemente à posição final.
-           */
           const eased =
             1 -
             Math.pow(
@@ -163,15 +235,17 @@ export default function TheKitchen() {
           const translateY =
             (1 - eased) * distance
 
-          const opacity = Math.min(
-            1,
-            wordProgress * 1.8
-          )
+          const opacity =
+            Math.min(
+              1,
+              wordProgress * 1.8
+            )
 
           word.style.transform =
             `translate3d(0, ${translateY}%, 0)`
 
-          word.style.opacity = opacity
+          word.style.opacity =
+            opacity
         }
       )
 
@@ -262,6 +336,13 @@ export default function TheKitchen() {
         <div className="brasa-kitchen__veil" />
 
         <div className="brasa-kitchen__words">
+          <strong
+            className="brasa-kitchen__intro"
+            ref={introRef}
+          >
+            QUEM SOMOS NÓS?
+          </strong>
+
           {words.map((word, index) => (
             <strong
               key={word}
