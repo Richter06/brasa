@@ -35,16 +35,19 @@ export const menuGroups = [
         'Pão de Queijo',
         'Manteiga de garrafa',
         'R$ 18',
+        '/media/paoDeQueijoVideo.mp4',
       ],
       [
         'Bolinho de Mandioca',
         'Carne de sol e pimenta da casa',
         'R$ 26',
+        '/media/bolinhoMandiocaVideo.mp4',
       ],
       [
         'Camarão na Brasa',
         'Limão, ervas e óleo de urucum',
         'R$ 38',
+        '/media/camaraoBrasaVideo.mp4',
       ],
     ],
   },
@@ -53,19 +56,22 @@ export const menuGroups = [
     title: 'Principais',
     items: [
       [
-        'Carne de Sol',
-        'Mandioca, manteiga de garrafa e cebola tostada',
+        'Costela de Boi',
+        'Costela de boi assada lentamente, mandioca e manteiga de garrafa',
         'R$ 68',
+        '/media/costelaVideo.mp4',
       ],
       [
         'Peixe na Brasa',
         'Peixe do dia, caju e legumes tostados',
         'R$ 72',
+        '/media/fishVideo.mp4',
       ],
       [
-        'Arroz de Fogo',
-        'Cogumelos, ervas e caldo reduzido',
+        'Feijoada Tradicional',
+        'Feijoada tradicional, arroz branco, couve e torresmo',
         'R$ 54',
+        '/media/feijoadaVideo.mp4',
       ],
     ],
   },
@@ -74,14 +80,16 @@ export const menuGroups = [
     title: 'Sobremesas',
     items: [
       [
-        'Cocada Queimada',
-        'Coco, caramelo e flor de sal',
+        'Brigadeiros com Granulado',
+        'Brigadeiros de chocolate, morango e coco com granulado',
         'R$ 24',
+        '/media/brigadeiroVideo.mp4',
       ],
       [
-        'Caju & Rapadura',
-        'Caju fresco, creme e rapadura',
+        'Bolo de chocolate com brigadeiro',
+        'Bolo de chocolate com brigadeiro e calda de chocolate',
         'R$ 22',
+        '/media/boloVideo.mp4',
       ],
     ],
   },
@@ -92,12 +100,10 @@ export const experienceImages = [
     label: 'Chegar',
     image: '/media/experience-arrival.jpg',
   },
-
   {
     label: 'Sentar',
     image: '/media/experience-table.jpg',
   },
-
   {
     label: 'Ficar',
     image: '/media/experience-night.jpg',

@@ -1,0 +1,703 @@
+/* =========================================================
+   BRASA — MENU
+   ========================================================= */
+
+.brasa-menu {
+  position: relative;
+
+  background: var(--brasa-black);
+  color: var(--brasa-cream);
+}
+
+/* =========================================================
+   CABEÇALHO
+   ========================================================= */
+
+.brasa-menu .brasa-section__heading {
+  margin-bottom: clamp(50px, 7vw, 90px);
+}
+
+.brasa-menu .brasa-section__eyebrow {
+  color: var(--brasa-orange);
+}
+
+.brasa-menu .brasa-section__heading h2 {
+  max-width: 850px;
+
+  color: var(--brasa-cream);
+
+  font:
+    500 clamp(3rem, 7vw, 7.5rem) / 0.9
+    'Playfair Display',
+    serif;
+
+  letter-spacing: -0.055em;
+}
+
+/* =========================================================
+   LAYOUT GERAL
+   CARDÁPIO (esquerda) + VISUALIZADOR (direita)
+   ========================================================= */
+
+.brasa-menu__layout {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.35fr)
+    minmax(300px, 0.95fr);
+
+  align-items: start;
+
+  gap: clamp(24px, 3vw, 48px);
+
+  width: 100%;
+}
+
+/* =========================================================
+   PAINÉIS (grupos do cardápio)
+   ========================================================= */
+
+.brasa-menu__panels {
+  display: flex;
+
+  width: 100%;
+
+  min-height:
+    clamp(420px, 55vh, 640px);
+
+  gap: 8px;
+}
+
+/* =========================================================
+   PAINEL
+   ========================================================= */
+
+.brasa-menu-panel {
+  position: relative;
+
+  flex: 1;
+
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow-x: hidden;
+  overflow-y: visible;
+
+  padding:
+    clamp(24px, 3vw, 42px);
+
+  background: var(--brasa-black-soft);
+
+  color: var(--brasa-cream);
+
+  border:
+    1px solid
+    var(--brasa-border);
+
+  transition:
+    flex 0.65s
+      cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.45s ease,
+    border-color 0.45s ease;
+}
+
+.brasa-menu-panel.is-open {
+  flex: 3;
+
+  background:
+    linear-gradient(
+      145deg,
+      #1b1714 0%,
+      #141210 70%
+    );
+
+  border-color:
+    rgba(244, 90, 36, 0.34);
+}
+
+/* =========================================================
+   CABEÇALHO DO PAINEL
+   ========================================================= */
+
+.brasa-menu-panel__trigger {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  padding: 0 0 24px;
+
+  border: 0;
+
+  border-bottom:
+    1px solid
+    var(--brasa-border);
+
+  background: transparent;
+
+  color: inherit;
+
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.brasa-menu-panel__title {
+  color: var(--brasa-cream);
+
+  font:
+    500 clamp(2rem, 3vw, 4rem) / 0.95
+    'Playfair Display',
+    serif;
+
+  letter-spacing: -0.04em;
+
+  transition:
+    color 0.35s ease;
+}
+
+/* =========================================================
+   CONTEÚDO DO PAINEL
+   ========================================================= */
+
+.brasa-menu-panel__content {
+  flex: 1;
+
+  min-width: 0;
+  min-height: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  opacity: 0;
+
+  overflow: visible;
+
+  transition:
+    opacity 0.35s ease;
+}
+
+.brasa-menu-panel.is-open
+  .brasa-menu-panel__content {
+  opacity: 1;
+}
+
+.brasa-menu-panel__items {
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  padding-top: 30px;
+}
+
+/* =========================================================
+   ITEM DO MENU
+   ========================================================= */
+
+.brasa-menu-item {
+  min-width: 0;
+
+  border-bottom:
+    1px solid
+    var(--brasa-border);
+}
+
+.brasa-menu-item:last-child {
+  border-bottom: 0;
+}
+
+.brasa-menu-item__trigger {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 16px;
+
+  padding:
+    clamp(18px, 2vw, 26px)
+    0;
+
+  border: 0;
+
+  background: transparent;
+
+  color: inherit;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.35s ease;
+}
+
+.brasa-menu-item__name {
+  min-width: 0;
+
+  color:
+    rgba(241, 233, 220, 0.72);
+
+  font:
+    500 clamp(1.25rem, 1.8vw, 1.85rem) / 1.15
+    'Playfair Display',
+    serif;
+
+  letter-spacing: -0.025em;
+
+  transition:
+    color 0.35s ease,
+    transform 0.5s
+      cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.brasa-menu-item__price {
+  flex: 0 0 auto;
+
+  color: var(--brasa-orange);
+
+  font:
+    500 0.85rem / 1
+    'DM Mono',
+    monospace;
+
+  letter-spacing: 0.03em;
+
+  opacity: 0.85;
+
+  white-space: nowrap;
+
+  transition:
+    opacity 0.35s ease;
+}
+
+/* =========================================================
+   ITEM SELECIONADO
+   ========================================================= */
+
+.brasa-menu-item.is-open
+  .brasa-menu-item__name {
+  color: var(--brasa-cream);
+
+  transform:
+    translateX(4px);
+}
+
+.brasa-menu-item.is-open
+  .brasa-menu-item__price {
+  opacity: 1;
+}
+
+.brasa-menu-item.is-open
+  .brasa-menu-item__trigger {
+  background-color:
+    rgba(244, 90, 36, 0.07);
+}
+
+/* =========================================================
+   HOVER — SOMENTE DISPOSITIVOS COM MOUSE
+   ========================================================= */
+
+@media (hover: hover) and (pointer: fine) {
+  .brasa-menu-panel:not(.is-open):hover {
+    background: #181512;
+
+    border-color:
+      rgba(241, 233, 220, 0.22);
+  }
+
+  .brasa-menu-panel:not(.is-open):hover
+    .brasa-menu-panel__title {
+    color:
+      rgba(241, 233, 220, 0.86);
+  }
+
+  .brasa-menu-item__trigger:hover
+    .brasa-menu-item__name {
+    color: var(--brasa-orange);
+  }
+}
+
+/* =========================================================
+   VISUALIZADOR
+   ========================================================= */
+
+.brasa-menu__viewer {
+  position: sticky;
+
+  top: clamp(24px, 4vw, 64px);
+
+  min-width: 0;
+
+  min-height:
+    clamp(420px, 55vh, 560px);
+
+  display: flex;
+
+  flex-direction: column;
+
+  overflow: hidden;
+
+  background: var(--brasa-black-soft);
+
+  border:
+    1px solid
+    var(--brasa-border);
+
+  transition:
+    border-color 0.4s ease;
+}
+
+.brasa-menu__viewer.is-active {
+  border-color:
+    rgba(244, 90, 36, 0.34);
+}
+
+/* =========================================================
+   CONTEÚDO COM VÍDEO + DADOS
+   ========================================================= */
+
+.brasa-menu__viewer-inner {
+  display: flex;
+
+  flex-direction: column;
+
+  height: 100%;
+
+  animation:
+    brasa-viewer-fade-in 0.5s ease both;
+}
+
+.brasa-menu__viewer-video-wrap {
+  position: relative;
+
+  width: 100%;
+
+  min-width: 0;
+
+  aspect-ratio: 16 / 10;
+
+  overflow: hidden;
+
+  background: #0b0a09;
+}
+
+.brasa-menu__viewer-video {
+  display: block;
+
+  width: 100%;
+
+  height: auto;
+
+  aspect-ratio: 16 / 10;
+
+  object-fit: cover;
+
+  object-position: center;
+
+  filter:
+    saturate(0.92)
+    contrast(1.03);
+}
+
+.brasa-menu__viewer-details {
+  display: flex;
+
+  flex: 1;
+
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  gap: 24px;
+
+  padding:
+    clamp(24px, 3vw, 34px);
+}
+
+.brasa-menu__viewer-label {
+  display: block;
+
+  margin-bottom: 12px;
+
+  color: var(--brasa-orange);
+
+  font:
+    500 0.65rem / 1
+    'DM Mono',
+    monospace;
+
+  letter-spacing: 0.12em;
+}
+
+.brasa-menu__viewer-details h5 {
+  margin: 0;
+
+  color: var(--brasa-cream);
+
+  font:
+    500 clamp(1.8rem, 2.6vw, 2.6rem) / 1
+    'Playfair Display',
+    serif;
+
+  letter-spacing: -0.04em;
+}
+
+.brasa-menu__viewer-description {
+  margin: 12px 0 0;
+
+  color: var(--brasa-muted);
+
+  font:
+    400 clamp(0.9rem, 1vw, 1rem) / 1.55
+    'Inter',
+    sans-serif;
+}
+
+.brasa-menu__viewer-price {
+  align-self: flex-start;
+
+  color: var(--brasa-orange-bright);
+
+  font:
+    500 clamp(1.5rem, 2vw, 2rem) / 1
+    'Playfair Display',
+    serif;
+
+  letter-spacing: -0.03em;
+}
+
+/* =========================================================
+   PLACEHOLDER
+   ========================================================= */
+
+.brasa-menu__viewer-placeholder {
+  display: flex;
+
+  flex: 1;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 14px;
+
+  padding:
+    clamp(32px, 4vw, 48px);
+
+  text-align: center;
+
+  color: var(--brasa-muted);
+}
+
+.brasa-menu__viewer-placeholder-eyebrow {
+  color: var(--brasa-orange);
+
+  font:
+    500 0.65rem / 1
+    'DM Mono',
+    monospace;
+
+  letter-spacing: 0.12em;
+}
+
+.brasa-menu__viewer-placeholder p {
+  max-width: 320px;
+
+  margin: 0;
+
+  font:
+    400 0.95rem / 1.6
+    'Inter',
+    sans-serif;
+}
+
+@keyframes brasa-viewer-fade-in {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .brasa-menu__layout {
+    grid-template-columns:
+      minmax(0, 1.15fr)
+      minmax(260px, 0.85fr);
+
+    gap: 24px;
+  }
+
+  .brasa-menu__panels {
+    min-height: 480px;
+  }
+
+  .brasa-menu-panel {
+    padding: 24px;
+  }
+
+  .brasa-menu-panel__title {
+    font-size:
+      clamp(1.7rem, 4vw, 2.8rem);
+  }
+
+  .brasa-menu__viewer {
+    min-height: 480px;
+  }
+}
+
+/* =========================================================
+   DISPOSITIVOS TOUCH
+   Todos os painéis ficam sempre abertos.
+   Não depende da largura da tela.
+   ========================================================= */
+
+@media (hover: none) and (pointer: coarse) {
+  .brasa-menu__panels {
+    min-height: auto;
+  }
+
+  .brasa-menu-panel,
+  .brasa-menu-panel.is-open {
+    flex: none;
+
+    min-height: auto;
+
+    transition:
+      background 0.4s ease,
+      border-color 0.4s ease;
+  }
+
+  .brasa-menu-panel__content,
+  .brasa-menu-panel.is-open
+    .brasa-menu-panel__content {
+    opacity: 1;
+
+    overflow: visible;
+  }
+
+  .brasa-menu-panel__items {
+    justify-content: flex-start;
+
+    padding-top: 20px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+  .brasa-menu__layout {
+    display: flex;
+
+    flex-direction: column;
+  }
+
+  .brasa-menu__panels {
+    flex-direction: column;
+
+    min-height: auto;
+
+    gap: 6px;
+  }
+
+  .brasa-menu-panel,
+  .brasa-menu-panel.is-open {
+    flex: none;
+
+    min-height: auto;
+  }
+
+  .brasa-menu-panel__title {
+    font-size:
+      clamp(1.8rem, 8vw, 2.6rem);
+  }
+
+  .brasa-menu-panel__items {
+    padding-top: 20px;
+  }
+
+  .brasa-menu-item__trigger {
+    padding: 16px 0;
+  }
+
+  .brasa-menu-item__name {
+    font-size: 1.15rem;
+  }
+
+  .brasa-menu-item__price {
+    font-size: 0.8rem;
+  }
+
+  .brasa-menu__viewer {
+    position: static;
+
+    top: auto;
+
+    min-height: 0;
+
+    margin-top: 28px;
+  }
+
+  .brasa-menu__viewer-video-wrap,
+  .brasa-menu__viewer-video {
+    aspect-ratio: 16 / 10;
+  }
+
+  .brasa-menu__viewer-details {
+    gap: 18px;
+  }
+
+  .brasa-menu__viewer-details h5 {
+    font-size:
+      clamp(1.8rem, 8vw, 2.4rem);
+  }
+
+  .brasa-menu__viewer-placeholder {
+    padding:
+      32px 24px;
+  }
+}
+
+/* =========================================================
+   REDUÇÃO DE MOVIMENTO
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .brasa-menu-panel,
+  .brasa-menu-panel__title,
+  .brasa-menu-item__name,
+  .brasa-menu__viewer,
+  .brasa-menu__viewer-inner {
+    transition: none;
+
+    animation: none;
+  }
+}
