@@ -5,7 +5,7 @@ import '../../styles/brasa/experience.css'
 const experiences = [
   {
     id: 'arrival',
-    label: 'CHEGAR.',
+    label: 'CHEGAR',
     color: 'orange',
     video: '/media/chegarVideo.mp4',
   },
@@ -48,6 +48,56 @@ export default function Experience() {
     }
 
     const update = () => {
+      const width = window.innerWidth
+
+      /*
+        Tablet e celular usam uma composição
+        estática e compacta.
+
+        A animação continua somente no desktop.
+      */
+
+      const isCompact = width <= 1100
+
+      if (isCompact) {
+        items.forEach((item) => {
+          if (!item) return
+
+          const media = item.querySelector(
+            '.brasa-experience__media'
+          )
+
+          const label = item.querySelector(
+            '.brasa-experience__label'
+          )
+
+          if (!media || !label) return
+
+          media.style.transform =
+            'translate3d(0, 0, 0) scale(1)'
+
+          media.style.borderRadius = '0px'
+
+          label.style.opacity = '1'
+
+          label.style.setProperty(
+            '--curtain-progress',
+            '0'
+          )
+
+          label.style.transform =
+            'translate3d(-50%, -50%, 0) scale(1)'
+        })
+
+        frame = requestAnimationFrame(update)
+
+        return
+      }
+
+      /*
+        DESKTOP
+      */
+
       items.forEach((item) => {
         if (!item) return
 
@@ -69,11 +119,9 @@ export default function Experience() {
           1
         )
 
-        /* ==================================================
-           PALAVRA
-           ================================================== */
-
         /*
+          PALAVRA
+
           0.00 → 0.25
           Palavra permanece completamente visível.
 
@@ -111,19 +159,17 @@ export default function Experience() {
           scale(${1 - exitEase * 0.03})
         `
 
-        /* ==================================================
-           VÍDEO
-           ================================================== */
-
         /*
+          VÍDEO
+
           0.00 → 0.43
           Vídeo permanece grande.
 
           0.43 → 0.70
-          Vídeo diminui.
+          Vídeo diminui e se desloca.
 
           0.70 → 1.00
-          Vídeo fica pequeno e congelado.
+          Vídeo permanece pequeno.
         */
 
         const shrinkStart = 0.43
@@ -139,13 +185,12 @@ export default function Experience() {
         const animationProgress =
           ease(mediaProgress)
 
-        const initialScale = 1
         const finalScale = 0.28
 
         const scale =
-          initialScale -
+          1 -
           animationProgress *
-            (initialScale - finalScale)
+            (1 - finalScale)
 
         const direction =
           Number(item.dataset.index) % 2 === 0

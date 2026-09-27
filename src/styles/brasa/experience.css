@@ -33,11 +33,9 @@
 
 .brasa-experience__media {
   position: relative;
-
   width: 100%;
   aspect-ratio: 16 / 9;
   height: auto;
-
   margin-top: 10vh;
 
   transform-origin: center center;
@@ -60,7 +58,6 @@
 
 .brasa-experience__video {
   position: absolute;
-
   inset: 0;
 
   width: 100%;
@@ -69,7 +66,6 @@
   display: block;
 
   object-fit: cover;
-
   object-position: center;
 
   pointer-events: none;
@@ -117,11 +113,12 @@
 
   margin: 0;
 
-  transform: translate3d(
-    -50%,
-    -50%,
-    0
-  );
+  transform:
+    translate3d(
+      -50%,
+      -50%,
+      0
+    );
 
   font-size: clamp(
     3rem,
@@ -194,66 +191,118 @@
    TABLET
    ================================================== */
 
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
   .brasa-experience {
-    padding-bottom: 16vh;
+    padding: 8vh 0 10vh;
   }
 
   .brasa-experience__feed {
-    gap: 12vh;
+    gap: 5vh;
   }
 
   .brasa-experience__item {
-    height: 125vh;
-    padding: 4vw;
+    height: auto;
+    padding: 0 5vw;
+    overflow: visible;
   }
 
   .brasa-experience__media {
     width: 100%;
     aspect-ratio: 16 / 9;
-    height: auto;
-    margin-top: 8vh;
+    margin-top: 0;
+
+    transform:
+      translate3d(0, 0, 0)
+      scale(1) !important;
+
+    border-radius: 0 !important;
+
+    will-change: auto;
   }
 
   .brasa-experience__label {
     font-size: clamp(
       3rem,
-      10vw,
-      6rem
+      8vw,
+      5.5rem
     );
+
+    opacity: 1 !important;
+
+    transform:
+      translate3d(
+        -50%,
+        -50%,
+        0
+      ) !important;
+
+    will-change: auto;
+  }
+
+  .brasa-experience__label::after {
+    display: none;
   }
 }
 
 /* ==================================================
-   MOBILE
+   CELULAR
    ================================================== */
 
 @media (max-width: 700px) {
   .brasa-experience {
-    padding-bottom: 12vh;
+    padding: 6vh 0 8vh;
   }
 
   .brasa-experience__feed {
-    gap: 8vh;
+    gap: 3.5vh;
   }
 
   .brasa-experience__item {
-    height: 110vh;
-    padding: 5vw;
+    height: auto;
+    padding: 0 4vw;
   }
 
   .brasa-experience__media {
     width: 100%;
     aspect-ratio: 16 / 9;
-    height: auto;
-    margin-top: 8vh;
+    margin-top: 0;
+  }
+
+  .brasa-experience__label {
+    max-width: 92%;
+
+    font-size: clamp(
+      2.4rem,
+      13vw,
+      4.5rem
+    );
+
+    letter-spacing: -0.06em;
+  }
+}
+
+/* ==================================================
+   CELULAR PEQUENO
+   ================================================== */
+
+@media (max-width: 420px) {
+  .brasa-experience {
+    padding-top: 5vh;
+  }
+
+  .brasa-experience__feed {
+    gap: 3vh;
+  }
+
+  .brasa-experience__item {
+    padding: 0 3.5vw;
   }
 
   .brasa-experience__label {
     font-size: clamp(
-      2.8rem,
-      13vw,
-      5rem
+      2.1rem,
+      14vw,
+      4rem
     );
   }
 }
@@ -271,11 +320,12 @@
   .brasa-experience__label {
     opacity: 1 !important;
 
-    transform: translate3d(
-      -50%,
-      -50%,
-      0
-    ) !important;
+    transform:
+      translate3d(
+        -50%,
+        -50%,
+        0
+      ) !important;
   }
 
   .brasa-experience__label-text {
