@@ -164,8 +164,8 @@ export default function Reservation() {
         className="brasa-reservation__edge"
         aria-hidden="true"
       >
+        <span>COM AMOR</span>
         <span>BRASA</span>
-        <span>ATÉ JÁ.</span>
       </div>
     </section>
   )
