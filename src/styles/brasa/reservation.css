@@ -1,0 +1,458 @@
+.brasa-reservation {
+  position: relative;
+  min-height: 92svh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: var(--brasa-orange);
+  isolation: isolate;
+}
+
+.brasa-reservation__content {
+  position: relative;
+  z-index: 3;
+  width: min(
+    calc(100% - 40px),
+    1200px
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* ==================================================
+   BACKGROUND
+   ================================================== */
+
+.brasa-media--reservation {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(255, 106, 33, 0.18),
+      transparent 42%
+    ),
+    #a93216;
+  transform: scale(1.04);
+  transition:
+    transform 1.4s
+      cubic-bezier(.16, 1, .3, 1);
+}
+
+.brasa-reservation.is-visible
+  .brasa-media--reservation {
+  transform: scale(1);
+}
+
+.brasa-reservation__veil {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(13, 12, 11, 0.24),
+      rgba(13, 12, 11, 0.08) 45%,
+      rgba(13, 12, 11, 0.3)
+    );
+  pointer-events: none;
+}
+
+/* ==================================================
+   EYEBROW
+   ================================================== */
+
+.brasa-reservation__eyebrow {
+  overflow: hidden;
+  margin-bottom: 34px;
+  color: var(--brasa-cream);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s
+      cubic-bezier(.16, 1, .3, 1);
+  transition-delay: 0.05s;
+}
+
+.brasa-reservation.is-visible
+  .brasa-reservation__eyebrow {
+  opacity: 0.8;
+  transform: translateY(0);
+}
+
+/* ==================================================
+   TITLE
+   Revelação palavra por palavra
+   ================================================== */
+
+.brasa-reservation__title {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 0.22em;
+  margin: 0;
+  color: var(--brasa-cream);
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(
+    5rem,
+    13vw,
+    12.5rem
+  );
+  font-weight: 500;
+  line-height: 0.78;
+  letter-spacing: -0.075em;
+}
+
+.brasa-reservation__word {
+  display: inline-block;
+  opacity: 0;
+  clip-path: inset(
+    100% 0 0 0
+  );
+  transform:
+    translateY(0.22em)
+    rotate(1.5deg);
+  transition:
+    clip-path 0.9s
+      cubic-bezier(.16, 1, .3, 1),
+    opacity 0.7s ease,
+    transform 0.9s
+      cubic-bezier(.16, 1, .3, 1);
+}
+
+.brasa-reservation.is-visible
+  .brasa-reservation__word {
+  opacity: 1;
+  clip-path: inset(
+    0 0 0 0
+  );
+  transform:
+    translateY(0)
+    rotate(0);
+}
+
+.brasa-reservation.is-visible
+  .brasa-reservation__word:nth-child(1) {
+  transition-delay: 0.12s;
+}
+
+.brasa-reservation.is-visible
+  .brasa-reservation__word:nth-child(2) {
+  transition-delay: 0.2s;
+}
+
+.brasa-reservation.is-visible
+  .brasa-reservation__word:nth-child(3) {
+  transition-delay: 0.28s;
+}
+
+.brasa-reservation.is-visible
+  .brasa-reservation__word:nth-child(4) {
+  transition-delay: 0.36s;
+}
+
+/* ==================================================
+   TEXTO
+   ================================================== */
+
+.brasa-reservation__text {
+  width: min(
+    100%,
+    460px
+  );
+  margin: 48px 0 0;
+  color: rgba(
+    241,
+    233,
+    220,
+    0.82
+  );
+  font-size: clamp(
+    1rem,
+    1.3vw,
+    1.2rem
+  );
+  line-height: 1.6;
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.8s ease,
+    transform 0.9s
+      cubic-bezier(.16, 1, .3, 1);
+  transition-delay: 0.62s;
+}
+
+.brasa-reservation.is-visible
+  .brasa-reservation__text {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==================================================
+   BOTÃO
+   Ímã no cursor
+   ================================================== */
+
+.brasa-reservation__button-area {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /*
+    Área invisível onde o ímã começa a funcionar.
+    O botão continua com o mesmo tamanho.
+  */
+  width: 500px;
+  height: 240px;
+
+  margin-top: 42px;
+}
+
+.brasa-reservation__button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 54px;
+  padding: 18px 28px;
+
+  border: 1px solid var(--brasa-cream);
+
+  background: transparent;
+  color: var(--brasa-cream);
+
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+
+  text-decoration: none;
+
+  will-change: transform;
+
+  transition:
+    transform 0.25s
+      cubic-bezier(.16, 1, .3, 1),
+    background 0.3s ease,
+    color 0.3s ease;
+
+  opacity: 0;
+  transform: translateY(18px);
+  transition-delay: 0.78s;
+}
+
+.brasa-reservation.is-visible
+  .brasa-reservation__button {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.brasa-reservation__button:hover {
+  background: var(--brasa-cream);
+  color: var(--brasa-black);
+}
+
+/*
+  Indicador visual da área magnética.
+  Ele não interfere no mouse.
+*/
+
+.brasa-reservation__button-area::before {
+  content: '';
+
+  position: absolute;
+
+  width: 100px;
+  height: 100px;
+
+  border: 1px solid
+    rgba(241, 233, 220, 0.18);
+
+  border-radius: 50%;
+
+  opacity: 0;
+
+  transform: scale(0.7);
+
+  transition:
+    opacity 0.4s ease,
+    transform 0.5s
+      cubic-bezier(.16, 1, .3, 1);
+
+  pointer-events: none;
+}
+
+.brasa-reservation__button-area:hover::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ==================================================
+   EDGE LABEL
+   ================================================== */
+
+.brasa-reservation__edge {
+  position: absolute;
+
+  left: clamp(
+    18px,
+    4vw,
+    60px
+  );
+
+  right: clamp(
+    18px,
+    4vw,
+    60px
+  );
+
+  bottom: 26px;
+
+  z-index: 3;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  color: rgba(
+    241,
+    233,
+    220,
+    0.48
+  );
+
+  font-family: 'DM Mono', monospace;
+  font-size: 0.5rem;
+  letter-spacing: 0.14em;
+
+  opacity: 0;
+
+  transition:
+    opacity 0.8s ease;
+
+  transition-delay: 1s;
+}
+
+.brasa-reservation.is-visible
+  .brasa-reservation__edge {
+  opacity: 1;
+}
+
+/* ==================================================
+   TABLET
+   ================================================== */
+
+@media (max-width: 900px) {
+  .brasa-reservation {
+    min-height: 82svh;
+  }
+
+  .brasa-reservation__title {
+    font-size: clamp(
+      4.5rem,
+      15vw,
+      8rem
+    );
+  }
+
+  .brasa-reservation__text {
+    margin-top: 38px;
+  }
+
+  .brasa-reservation__button-area {
+    width: 420px;
+    height: 200px;
+  }
+}
+
+/* ==================================================
+   MOBILE
+   ================================================== */
+
+@media (max-width: 600px) {
+  .brasa-reservation {
+    min-height: 78svh;
+  }
+
+  .brasa-reservation__content {
+    width: min(
+      calc(100% - 36px),
+      600px
+    );
+  }
+
+  .brasa-reservation__eyebrow {
+    margin-bottom: 26px;
+    font-size: 0.52rem;
+  }
+
+  .brasa-reservation__title {
+    max-width: 100%;
+    gap: 0 0.18em;
+    font-size: clamp(
+      4rem,
+      18vw,
+      6.5rem
+    );
+    line-height: 0.8;
+  }
+
+  .brasa-reservation__text {
+    max-width: 330px;
+    margin-top: 34px;
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  .brasa-reservation__button-area {
+    width: 300px;
+    height: 130px;
+    margin-top: 32px;
+  }
+
+  .brasa-reservation__button {
+    width: 100%;
+    padding: 17px 20px;
+    font-size: 0.55rem;
+  }
+
+  .brasa-reservation__edge {
+    bottom: 18px;
+    font-size: 0.46rem;
+  }
+}
+
+/* ==================================================
+   REDUCED MOTION
+   ================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .brasa-reservation__media,
+  .brasa-media--reservation {
+    transform: none;
+  }
+
+  .brasa-reservation__eyebrow,
+  .brasa-reservation__word,
+  .brasa-reservation__text,
+  .brasa-reservation__button {
+    opacity: 1;
+    transform: none;
+    clip-path: none;
+    transition: none;
+  }
+
+  .brasa-reservation__edge {
+    opacity: 1;
+    transition: none;
+  }
+}
