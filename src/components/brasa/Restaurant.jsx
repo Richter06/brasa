@@ -28,7 +28,7 @@ export default function Restaurant() {
               <span>ENDEREÇO</span>
 
               <strong>
-                Praça do Ferreira, 120
+                Praça do Ferreira, 124
               </strong>
 
               <strong>
